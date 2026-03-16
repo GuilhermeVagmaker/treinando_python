@@ -1,0 +1,46 @@
+lista_frase_motivacional = [
+  "\nGrandes resultados começam com pequenos passos dados todos os dias",
+  "\nA disciplina te leva a lugares onde a motivação sozinha nunca chega",
+  "\nTodo especialista já foi um iniciante que não desistiu.",
+  "\nSe hoje foi difícil, é porque você está evoluindo.",
+  "\nO esforço de hoje é a conquista de amanhã.",
+  "\nQuem insiste um pouco mais acaba chegando mais longe.",
+  "\nCada erro é apenas mais um passo em direção ao acerto.",
+  "\nVocê não precisa ser perfeito, apenas constante.",
+  "\nA diferença entre quem consegue e quem desiste é a persistência.",
+  "\nPequenos progressos diários constroem grandes conquistas.",
+  "\nO sucesso é construído na rotina, não na sorte.",
+  "\nContinue mesmo quando estiver cansado — a vitória, pode estar logo depois.",
+  "\nNão compare seu começo com o meio do caminho de outra pessoa.",
+  "\nA dedicação transforma sonhos em realidade.",
+  "\nQuanto mais você pratica, mais a sorte parece aparecer.",
+  "\nSeu futuro agradece o esforço que você faz hoje.",
+  "\nAprender algo novo todos os dias é um investimento em si mesmo.",
+  "\nA persistência vence o talento quando o talento desiste.",
+  "\nA jornada pode ser longa, mas cada passo vale a pena.",
+  "\nVocê é capaz de muito mais do que imagina."
+]
+
+
+lista_curiosidades_aleatorias = [
+  "\nPolvos têm três corações.",
+  "\nO mel nunca estraga — já foram encontrados potes de mel com mais de 3 mil anos ainda comestíveis.",
+  "\nBananas são radioativas, mas em um nível extremamente pequeno e seguro.",
+  "\nO coração de uma baleia azul pode pesar mais de 180 kg.",
+  "\nExistem mais árvores na Terra do que estrelas na Via Láctea (estimativa científica).",
+  "\nO polvo possui sangue azul.",
+  "\nA Lua está se afastando da Terra cerca de 3,8 cm por ano.",
+  "\nTubarões existem há mais tempo que as árvores.",
+  "\nAs lontras dormem de mãos dadas para não se separarem enquanto flutuam.",
+  "\nUm dia em Vênus é mais longo que um ano em Vênus.",
+  "\nO cérebro humano tem cerca de 86 bilhões de neurônios.",
+  "\nAs girafas têm o mesmo número de vértebras no pescoço que os humanos (7)",
+  "\nO cheiro da chuva no chão seco tem um nome: petricor.",
+  "\nAlgumas tartarugas podem respirar pelo traseiro durante a hibernação.",
+  "\nO DNA humano é aproximadamente 60% igual ao de uma banana.",
+  "\nExiste um tipo de água-viva que é biologicamente imortal.",
+  "\nUm raio é cinco vezes mais quente que a superfície do Sol.",
+  "\nO maior organismo vivo do planeta é um fungo gigante nos EUA que ocupa quilômetros de floresta.",
+  "\nAs formigas não têm pulmões — elas respiram por pequenos buracos no corpo.",
+  "\nO Tiranossauro Rex viveu mais perto da época atual do que da época do Estegossauro."
+]
