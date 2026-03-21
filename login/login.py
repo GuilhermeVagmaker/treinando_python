@@ -1,57 +1,95 @@
 import customtkinter as ctk
 import json
 import os
-
-arquivos = "usuarios.json"
-if not os.path.exists(arquivos):
-    with open(arquivos, "w") as f:
-       json.dump({}, f)
-
-def loginUsuario():
-  usuario = campo_usuario.get()
-  senha = campo_senha.get()
-
-  with open(arquivos, "r") as arquivo:
-    usuarios = json.load(arquivo)
-
-  usuarios[usuario] = senha
-
-  with open(arquivos, "w") as arquivo:
-     json.dump(usuarios, arquivo, indent=4)
-
-  for user, password in usuarios.items():
-     print(f"Usuario: {user} | Senha: {password}")
-
+from popup import popLogin
+from popup import popErroSenha
+from popup import popErroUsuario
+from criarUser import criar_user
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
 app = ctk.CTk()
-app.geometry("500x400")
-app.title("Titulo")
+app.geometry("500x450")
+app.title("Login")
 
-frame_principal = ctk.CTkFrame(app)
-frame_principal.pack(expand=True)
+usuarios_arquivo = "usuarios.json"
+if not os.path.exists(usuarios_arquivo):
+    with open(usuarios_arquivo, "w") as f:
+        json.dump({}, f)
 
-frame_login = ctk.CTkFrame(frame_principal, width=300, height=250, corner_radius=15)
-frame_login.pack(padx=20, pady=20)
+def loginUsuario():
+    usuario = campo_usuario.get()
+    senha = campo_senha.get()
+    
+    with open(usuarios_arquivo, "r") as arquivo:
+        usuarios = json.load(arquivo)
+    
+    # Apenas para teste: adiciona o usuário
+    usuarios[usuario] = senha
+    if usuario in usuarios:
+      if usuarios[usuario] == senha:
+        print("Login efetuado com sucesso")
+        popLogin()
+      else:
+        print("Usuário ou senha incorretos")
+        popErroSenha()
+    else: 
+       print("Usuario não criado")
+       popErroUsuario()
 
-titulo = ctk.CTkLabel(frame_login, text="Criar Usuario", font=("Arial", 24))
-titulo.grid(row=0, column=0,columnspan=3, padx=10, pady=10)
+frame_principal = ctk.CTkFrame(app, corner_radius=20)
+frame_principal.pack(expand=True, fill="both", padx=40, pady=40)
 
-label_usuario = ctk.CTkLabel(frame_login, text="Usuario:", font=("Arial", 16))
-label_usuario.grid(row=1, column=0, padx=10, pady=10)
+frame_login = ctk.CTkFrame(frame_principal, width=400, height=350, corner_radius=20)
+frame_login.place(relx=0.5, rely=0.5, anchor="center")  # centraliza no frame
+frame_login.pack_propagate(False)
 
-campo_usuario = ctk.CTkEntry(frame_login, width=200, placeholder_text="Guilherme@gmail.com")
-campo_usuario.grid(row=1, column=1, padx=10, pady=10)
+titulo = ctk.CTkLabel(frame_login, text="Bem-vindo!", font=("Arial", 26, "bold"))
+titulo.pack(pady=(20, 30))
 
-label_senha = ctk.CTkLabel(frame_login, text="Senha:", font=("Arial", 16))
-label_senha.grid(row=2, column=0, padx=10, pady=10)
+campo_usuario = ctk.CTkEntry(frame_login, width=300, placeholder_text="Digite seu email")
+campo_usuario.pack(pady=10)
 
-campo_senha = ctk.CTkEntry(frame_login, show="*", width=200, placeholder_text="123456")
-campo_senha.grid(row=2, column=1, padx=10, pady=10)
 
-botao = ctk.CTkButton(frame_login, text="Entrar", command=loginUsuario, font=("Arial", 18))
-botao.grid(row=3, column=0,columnspan=3, pady=20)
+campo_senha = ctk.CTkEntry(frame_login, width=300, show="*", placeholder_text="Digite sua senha")
+campo_senha.pack(pady=10)
+
+frame_botoes = ctk.CTkFrame(frame_login, fg_color="transparent")
+frame_botoes.pack(pady=15, fill="x")
+
+botao_esqueceu_senha = ctk.CTkButton(
+    frame_botoes,
+    text="Esqueceu a senha?",
+    fg_color="transparent",
+    text_color="white",
+    hover_color="gray30",
+    border_width=0,
+    font=("Arial", 14)
+)
+botao_esqueceu_senha.pack(side="left", expand=True, padx=10)
+
+botao_criar_usuario = ctk.CTkButton(
+    frame_botoes,
+    command=criar_user,
+    text="Criar usuário",
+    fg_color="transparent",
+    text_color="white",
+    hover_color="gray30",
+    border_width=0,
+    font=("Arial", 14)
+)
+botao_criar_usuario.pack(side="right", expand=True, padx=10)
+
+
+botao_entrar = ctk.CTkButton(
+    frame_login,
+    text="Entrar",
+    command=loginUsuario,
+    font=("Arial", 18),
+    width=200,
+    corner_radius=12
+)
+botao_entrar.pack(pady=25)
 
 app.mainloop()
