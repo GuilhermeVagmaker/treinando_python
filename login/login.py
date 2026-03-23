@@ -5,12 +5,13 @@ from popup import popLogin
 from popup import popErroSenha
 from popup import popErroUsuario
 from criarUser import criar_user
+import bcrypt
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
 
 app = ctk.CTk()
-app.geometry("500x450")
+app.geometry("700x700")
 app.title("Login")
 
 usuarios_arquivo = "usuarios.json"
@@ -24,36 +25,61 @@ def loginUsuario():
     
     with open(usuarios_arquivo, "r") as arquivo:
         usuarios = json.load(arquivo)
-    
-    # Apenas para teste: adiciona o usuário
-    usuarios[usuario] = senha
+
     if usuario in usuarios:
-      if usuarios[usuario] == senha:
+      
+      senha_salva = usuarios[usuario]["senha"]
+      
+      if bcrypt.checkpw(senha.encode("utf-8"), senha_salva.encode("utf-8")):
         print("Login efetuado com sucesso")
-        popLogin()
+        popLogin(app)
       else:
         print("Usuário ou senha incorretos")
-        popErroSenha()
+        popErroSenha(app)
     else: 
        print("Usuario não criado")
-       popErroUsuario()
+       popErroUsuario(app)
+def mostrarSenha():
+   if campo_senha.cget("show") == "*":
+      campo_senha.configure(show="")
+      botao_mostrar.configure(text="☒ Mostrar senha ")
+
+   else:
+      campo_senha.configure(show="*")
+      botao_mostrar.configure(text="☐ Mostrar senha ")
+    
 
 frame_principal = ctk.CTkFrame(app, corner_radius=20)
 frame_principal.pack(expand=True, fill="both", padx=40, pady=40)
 
-frame_login = ctk.CTkFrame(frame_principal, width=400, height=350, corner_radius=20)
-frame_login.place(relx=0.5, rely=0.5, anchor="center")  # centraliza no frame
+frame_login = ctk.CTkFrame(frame_principal, width=600, height=500, corner_radius=20)
+frame_login.pack(expand=True)  # centraliza no frame
 frame_login.pack_propagate(False)
 
-titulo = ctk.CTkLabel(frame_login, text="Bem-vindo!", font=("Arial", 26, "bold"))
+titulo = ctk.CTkLabel(frame_login, text="Bem-vindo!", font=("Arial", 40, "bold"))
 titulo.pack(pady=(20, 30))
 
-campo_usuario = ctk.CTkEntry(frame_login, width=300, placeholder_text="Digite seu email")
-campo_usuario.pack(pady=10)
+campo_usuario = ctk.CTkEntry(frame_login,width=400, height=50, font=("Arial", 20), placeholder_text="Digite seu email")
+campo_usuario.pack(pady=10, padx=40,  fill="x")
+
+campo_senha = ctk.CTkEntry(frame_login,width=400, height=50, font=("Arial", 20), show="*", placeholder_text="Digite sua senha")
+campo_senha.pack(pady=10, padx=40, fill="x")
 
 
-campo_senha = ctk.CTkEntry(frame_login, width=300, show="*", placeholder_text="Digite sua senha")
-campo_senha.pack(pady=10)
+botao_mostrar = ctk.CTkButton(
+        frame_login,
+        text="☐ Mostrar senha",
+        width=30,
+        fg_color="transparent",
+        text_color="white",
+        border_width=0,
+        command=mostrarSenha,
+        hover_color="gray30"
+    )
+botao_mostrar.pack(anchor="w",pady=10, padx=40,)
+
+
+
 
 frame_botoes = ctk.CTkFrame(frame_login, fg_color="transparent")
 frame_botoes.pack(pady=15, fill="x")
@@ -86,10 +112,11 @@ botao_entrar = ctk.CTkButton(
     frame_login,
     text="Entrar",
     command=loginUsuario,
-    font=("Arial", 18),
-    width=200,
+    font=("Arial", 24),
+    width=350,
+    height=50,
     corner_radius=12
 )
-botao_entrar.pack(pady=25)
+botao_entrar.pack(pady=50, expand=True)
 
 app.mainloop()

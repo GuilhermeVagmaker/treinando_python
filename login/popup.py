@@ -1,6 +1,6 @@
-import customtkinter as ctk
+def popup(app, titulo, mensagem):
 
-def popup(titulo, mensagem):
+    import customtkinter as ctk
 
     janela = ctk.CTkToplevel()
     janela.title(titulo)
@@ -8,8 +8,7 @@ def popup(titulo, mensagem):
     janela.resizable(False, False)
 
     janela.attributes("-topmost", True)
-    janela.grab_set()
-    janela.focus_force()
+   
 
     label = ctk.CTkLabel(
         janela,
@@ -25,19 +24,19 @@ def popup(titulo, mensagem):
     )
     botao.pack(pady=10)
 
-    janela.after(2000, popup.destroy())
+    janela.after(50, janela.grab_set)
 
-def popLogin():
-    popup("Login", "Login Efetuado com sucesso!!")
-def popErroSenha():
-    popup("Erro", "Senha ou usuario errado!!")
-def popErroUsuario():
-    popup("Erro", "Usuario não encontrado!!")
-def popUsuarioExistente():
-    popup("Criar Login", "Já existe um usuario com esse gmail!!")
-def popUsuarioCriado():
-    popup("Criar Login", "Usuario criado com sucesso!!")
-def popPreenchaOsCampos():
-    popup("Erro", "Preencha todos os campos corretamentes")
+def popLogin(app):
+    popup(app, "Login", "Login Efetuado com sucesso!!")
+def popErroSenha(app):
+    popup(app,"Erro", "Senha ou usuario errado!!")
+def popErroUsuario(app):
+    popup(app,"Erro", "Usuario não encontrado!!")
+def popUsuarioExistente(app):
+    popup(app,"Criar Login", "Já existe um usuario com esse gmail!!")
+def popUsuarioCriado(app):
+    popup(app,"Criar Login", "Usuario criado com sucesso!!")
+def popPreenchaOsCampos(app):
+    popup(app,"Erro", "Preencha todos os campos corretamentes")
 
 
